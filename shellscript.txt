@@ -1,0 +1,578 @@
+1)introduction:-
+
+echo "hello world"
+
+2.using variables and comments:-
+
+echo "hello world"
+
+echo our shell name is $BASH 
+echo our shell version is $BASH_VERSION
+echo our home directory is $HOME 
+echo our current working directory is $PWD
+
+name=Lakshman
+VALUE=10
+echo the name is $name
+echo value $VALUE 
+
+3.Read user input:-
+
+1.echo "enter name:"
+read name 
+echo "Entered name :$name"
+
+2.echo "enter names:"
+read name1 name2 name3 
+echo "Names :$name1 , $name2 , $name3"
+
+3.read -p 'username : ' user_var 
+echo "username :$user_var"
+
+4.read -p 'username : ' user_var 
+read -sp 'password : ' pass_var 
+echo "username :$user_var"
+echo "password :$pass_var"
+
+5.read -p 'username : ' user_var 
+read -sp 'password : ' pass_var
+echo 
+echo "username :$user_var"
+echo "password :$pass_var"
+
+6.echo "Enter names:"
+read -a names
+echo "Names : ${names[0]},${names[1]}"
+
+7.echo "Enter name :"
+read 
+echo "Name : $REPLY"
+
+4.pass arguments to a bash-script
+
+1.echo $1 $2 $3 ' > echo $1 $2 $3'
+
+2.echo $0 $1 $2 $3 ' > echo $1 $2 $3'
+args=("$@")
+#echo ${args[0]} ${args[1]} ${args[2]} ${args[3]}
+echo $@
+echo $#
+
+5.if statement:-
+
+1.count=10
+if [ $count -lt 10 ]
+then
+  echo "condition is true"
+fi 
+
+2.word=abc
+if [ $word == "abc" ]
+then
+  echo "condition is true"
+fi  
+
+
+3.word=a
+if [[ $word < "b" ]]
+then
+  echo "condition is true"
+fi 
+
+4.word=a
+if [[ $word == "a" ]]
+then
+  echo "condition is true"
+else
+  echo "condition is false"  
+fi  
+
+5.word=a
+if [[ $word == "b" ]]
+then
+  echo "condition is true"
+elif [[ $word == "a" ]]
+then   
+  echo "condition a is true"
+else   
+  echo "condition is false"  
+fi 
+
+6.file test operators
+
+7.how to append output to the end of test file
+
+echo -e "Enter the name of the file :\c"
+read file_name
+if [ -f $file_name ]
+then
+     if [ -w $file_name ]
+     then
+       echo "type same text data to quit press ctrl+d"
+       cat >> $file_name
+     else    
+        echo "the file do not have write permissions"
+      fi   
+else  
+  echo "$file_name not found"
+fi
+
+8.logical AND operator:-
+
+age=50
+
+if [[ "$age" -gt 18 && "$age" -lt 30 ]]
+then
+  echo "valid age"
+  else
+  echo "age not valid"
+ fi 
+ 
+ 9.logical or operator:-
+ 
+ age=60
+
+if [ "$age" -gt 18 ] || [ "$age" -lt 30 ]
+then
+  echo "valid age"
+  else
+  echo "age not valid"
+ fi 
+ 
+ 10.perform arithmetic operator:-
+ 
+ num1=10
+num2=2
+
+echo $(( num1 + num2 ))
+echo $(( num1 - num2 ))
+echo $(( num1 * num2 ))
+echo $(( num1 / num2 ))
+echo $(( num1 % num2 ))
+
+11.floating point math operations in bash:-
+
+1.num1=20.5
+num2=5
+
+echo "20.5+5" | bc
+echo "20.5-5" | bc
+echo "20.5*5" | bc
+echo "20.5/5" | bc
+
+2.num1=20.5
+num2=5
+
+echo "$num1+$num2" | bc
+echo "$num1-$num2" | bc
+echo "20.5*5" | bc
+echo "scale=20;20.5/5" | bc
+echo "20.5%5" | bc
+
+num=27
+
+echo "scale=2;sqrt($num)" | bc -l
+echo "scale=2;2^3" | bc -l
+
+12.the case statements:-
+
+vehicle=$1
+
+case $vehicle in
+    "car" )
+        echo "Rent of $vehicle is 100 dollars" ;;
+    "van" )    
+        echo "Rent of $vehicle is 200 dollars" ;;
+    "bicycle" )    
+        echo "Rent of $vehicle is 50 dollars" ;;
+    "truck" )  
+        echo "Rent of $vehicle is 500 dollars" ;;
+    * )
+        echo "unknown vehicle" ;;
+esac        
+
+case statement example:-
+echo -e "Enter some character : \c"
+read value
+
+case $value in
+    [a-z] )
+        echo "user entered $value a to z" ;;
+    [A-Z] )    
+        echo "user entered $value A to Z" ;;
+    [0-9] )    
+        echo "user entered $value 0 to 9" ;;
+    ? )  
+        echo "user entered $value special character" ;;
+    * )
+        echo "unknown input" ;;
+esac        
+
+14.Array variables:-
+
+1.os=('ubuntu' 'window' 'kali')
+
+echo "${os[@]}"
+
+2.os=('ubuntu' 'window' 'kali')
+
+echo "${os[@]}"
+echo "${os[0]}"
+echo "${!os[@]}"
+echo "${#os[@]}"
+
+3.os=('ubuntu' 'window' 'kali')
+os[3]='mac'
+echo "${os[@]}"
+echo "${os[0]}"
+echo "${!os[@]}"
+echo "${#os[@]}"
+
+4.os=('ubuntu' 'window' 'kali')
+os[0]='mac'
+echo "${os[@]}"
+echo "${os[0]}"
+echo "${!os[@]}"
+echo "${#os[@]}"
+
+5.os=('ubuntu' 'window' 'kali')
+os[0]='mac'
+
+unset os[2]
+echo "${os[@]}"
+echo "${os[0]}"
+echo "${!os[@]}"
+echo "${#os[@]}"
+
+
+15.while loop
+
+1.n=1
+
+while [ $n -le 10 ]
+do
+    echo "$n"
+    n=$(( n+1 ))
+done    
+
+2.n=1
+
+while [ $n -le 10 ]
+do
+    echo "$n"
+    (( n++ ))
+done   
+
+3.n=1
+
+while (( $n <= 10 )) 
+do
+    echo "$n"
+    (( ++n ))
+done    
+
+16.using sleep and open terminal:-
+
+n=1
+
+while [ $n -le 3 ] 
+do
+    echo "$n"
+    (( n++ ))
+    #sleep 1
+    gnome-terminal &
+done   
+
+17.Read a file content in bash:-
+
+1.while read p
+do
+    echo $p
+done < hello.sh   
+
+2.cat hello.sh | while read p
+do
+    echo $p
+done     
+
+3.while IFS= read -r line
+do
+    echo $line 
+done < /etc/host.conf
+
+18.UNTIL LOOPS:-
+
+1.n=1
+
+until [ $n -ge 10 ]
+do
+   echo $n
+   n=$(( n+1 ))
+done       
+
+2.n=1
+
+until (( $n > 10 ))
+do
+   echo $n
+   n=$(( n+1 ))
+done       
+
+3.n=1
+
+until (( $n > 10 ))
+do
+   echo $n
+   (( n++ ))
+done    
+
+19.for loop:-
+
+1.for i in 1 2 3 4 5
+do
+   echo $i
+done        
+
+
+2.for i in {1..10}
+do
+   echo $i
+done        
+
+3.for i in {0..10..2}
+do
+   echo $i
+done        
+
+4.for (( i=1; i<=5; i++))
+do
+   echo $i
+done        
+
+20.using for loops execute commands:-
+
+1.for command in ls pwd date
+do
+   echo "------------$command------------"
+   $command
+done         
+
+2.for item in *
+do
+   if [ -d $item ]
+   then
+     echo $item
+   fi
+done   
+
+21.select loop:-
+
+1.select name in mark john tom ben
+do
+     echo "$name selected" 
+done   
+
+2.select name in mark john tom ben
+do
+    case $name in 
+    mark)
+      echo "$name selected"
+      ;; 
+    hohn)
+      echo "$name selected"
+      ;;
+    tom)
+      echo "$name selected"
+      ;;
+    ben)
+      echo "$name selected"
+      ;;
+    *)
+      echo "error please provide the no. between 1..4"
+    esac         
+done   
+
+22.Break and continue statements:-
+
+1.for (( i=1; i<=10; i++ ))
+do
+     if [ $i -gt 5 ]
+     then
+       break
+     fi
+     echo "$i"
+done       
+
+2.for (( i=1; i<=10; i++ ))
+do
+     if [ $i -eq 3 -o $i -eq 5 ]
+     then
+       continue
+     fi
+     echo "$i"
+done       
+
+
+
+23.Functions:-
+
+
+function print()
+{
+  echo $1
+}
+
+quit () {
+  exit
+}
+
+print Hello
+
+echo "foo"
+quit
+
+24,Locaal variables:-
+
+1.function print()
+{
+  name=$1
+  echo "the name is $name" 
+}
+
+print Hello
+
+echo "foo"
+
+2.function print()
+{
+  name=$1
+  echo "the name is $name" 
+}
+
+name="tom"
+echo "the name is $name"
+
+print mark
+
+echo "foo"
+
+3.function print()
+{
+  name=$1
+  echo "the name is $name" 
+}
+
+name="tom"
+echo "the name is $name : Before"
+
+print mark
+
+echo "the name is $name : After"
+
+
+4.function print()
+{
+ local name=$1
+  echo "the name is $name" 
+}
+
+name="tom"
+echo "the name is $name : Before"
+
+print mark
+
+echo "the name is $name : After"
+
+25.function example:-
+
+usage() {
+  echo "you need to provide an argument : "
+  echo "usage : $0 file_name" 
+}
+
+is_file_exist() {
+  local file="$1"
+  [[ -f "$file" ]] && return 0 || return 1
+}
+
+[[ $# -eq 0 ]] && usage
+
+if ( is_file_exist "$1" ) 
+then
+   echo "file found"
+else
+   echo "file not found"
+fi       
+
+
+26.readonly
+1.var=31
+
+readonly var
+
+var=50
+
+echo "var => $var"
+
+hello() {
+  echo "hello world"
+}
+
+readonly -f hello
+
+hello() {
+  echo "hello world again"
+}
+
+2.hello() {
+  echo "hello"
+}
+
+readonly -f hello
+readonly -f
+
+27.signals and traps:-
+
+1.echo "pid is $$"
+while (( count < 10 ))
+do
+   sleep 1
+   (( count ++ ))
+   echo $count 
+done
+exit 0   
+
+2.trap "echo Exit command is detected" 0
+
+echo "hello world"
+
+exit 0
+
+3.trap "echo Exit command is detected" SIGINT
+
+echo "pid is $$"
+while (( count < 10 ))
+do
+    sleep 1
+    (( count ++ ))
+    echo $count 
+done
+exit 0
+
+28.debugging:-
+
+set -x
+file=/home/lucky/Desktop/file.txt
+
+set +x
+trap "rm -f $file && eccho file deleted; exit" 0 2 15
+
+echo "pid is $$"
+while (( count < 10 ))
+do
+    sleep 1
+    (( count ++ ))
+    echo $count 
+done
+exit 0
+    
